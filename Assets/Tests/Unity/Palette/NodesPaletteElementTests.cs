@@ -55,7 +55,7 @@ namespace Tests.Unity.Palette
             
             elementHolder.Element.Rotate();
             
-            Assert.True(Mathf.Approximately(elementHolder.Value.transform.rotation.eulerAngles.z, 90));
+            Assert.True(Mathf.Approximately(elementHolder.Value.transform.rotation.eulerAngles.z, -90));
         }
         
         [Test]
@@ -66,7 +66,7 @@ namespace Tests.Unity.Palette
             elementHolder.Element.Rotate();
             elementHolder.Element.Rotate();
             
-            Assert.True(Mathf.Approximately(elementHolder.Value.transform.rotation.eulerAngles.z, 180));
+            Assert.True(Mathf.Approximately(elementHolder.Value.transform.rotation.eulerAngles.z, -180));
         }
         
         [Test]
@@ -78,7 +78,7 @@ namespace Tests.Unity.Palette
             elementHolder.Element.Rotate();
             elementHolder.Element.Rotate();
             
-            Assert.True(Mathf.Approximately(elementHolder.Value.transform.rotation.eulerAngles.z, 270));
+            Assert.True(Mathf.Approximately(elementHolder.Value.transform.rotation.eulerAngles.z, -270));
         }
         
         [Test]
@@ -105,7 +105,7 @@ namespace Tests.Unity.Palette
             elementHolder.Element.Rotate();
             elementHolder.Element.Rotate();
             
-            Assert.True(Mathf.Approximately(elementHolder.Value.transform.rotation.eulerAngles.z, 90));
+            Assert.True(Mathf.Approximately(elementHolder.Value.transform.rotation.eulerAngles.z, -90));
         }
         
         [Test]

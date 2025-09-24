@@ -1,4 +1,5 @@
 using System;
+using Code.Domain;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -24,6 +25,28 @@ namespace Code.Unity.GameField.Palette
             _highlight.SetActive(false);
         }
 
+        public NodeType NodeType()
+        {
+            return _nodeData.Type;
+        }
+        
+        public Rotation Rotation()
+        {
+            return RotationFromAngle(Mathf.RoundToInt(_icon.transform.rotation.eulerAngles.z));
+        }
+
+        private Rotation RotationFromAngle(int degrees)
+        {
+            return degrees switch
+            {
+                0 => Domain.Rotation.None,
+                -90 => Domain.Rotation.Clockwise90,
+                -180 => Domain.Rotation.Clockwise180,
+                -270 => Domain.Rotation.Clockwise270,
+                _ => throw new ArgumentOutOfRangeException(nameof(degrees), degrees, null)
+            };
+        }
+
         public void Select()
         {
             _highlight.SetActive(true);
@@ -36,7 +59,7 @@ namespace Code.Unity.GameField.Palette
 
         public void Rotate()
         {
-            var newAngle = Mathf.RoundToInt(_icon.transform.rotation.eulerAngles.z + 90) % 360;
+            var newAngle = Mathf.RoundToInt(_icon.transform.rotation.eulerAngles.z - 90) % 360;
             _icon.transform.rotation = Quaternion.Euler(0, 0, newAngle);
         }
 

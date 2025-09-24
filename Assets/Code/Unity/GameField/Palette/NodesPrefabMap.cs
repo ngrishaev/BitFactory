@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Code.Domain;
 using UnityEngine;
 
 namespace Code.Unity.GameField.Palette
@@ -8,9 +9,9 @@ namespace Code.Unity.GameField.Palette
     public class NodesPrefabMap: ScriptableObject
     {
         [SerializeField] private List<NodeMapData> _nodePrefabs = new();
-        private readonly Dictionary<EntityType, GameObject> _typeToPrefabDictionary = new();
+        private readonly Dictionary<NodeType, GameObject> _typeToPrefabDictionary = new();
 
-        public GameObject GetPrefab(EntityType id)
+        public GameObject GetPrefab(NodeType id)
         {
             if(_typeToPrefabDictionary.Count == 0)
             {
@@ -42,15 +43,10 @@ namespace Code.Unity.GameField.Palette
         [Serializable]
         public struct NodeMapData
         {
-            public EntityType Type;
+            public NodeType Type;
             public GameObject Prefab;
         }
         
-        public enum EntityType
-        {
-            // TODO: Move to Domain
-            ConnectorHorizontal,
-            ConnectorL
-        }
+
     }
 }

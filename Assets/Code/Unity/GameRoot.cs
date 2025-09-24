@@ -15,7 +15,8 @@ namespace Code.Unity
 
         private void Start()
         {
-            var orchestration = new GameFieldOrchestrator(_input, _builder, _palette);
+            var gameField = new Domain.GameField(8, 8);
+            var orchestration = new GameFieldOrchestrator(gameField, _input, _builder, _palette);
         }
     }
 }

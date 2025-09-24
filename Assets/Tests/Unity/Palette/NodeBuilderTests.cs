@@ -1,4 +1,5 @@
-﻿using Code.Unity;
+﻿using Code.Domain;
+using Code.Unity;
 using Code.Unity.GameField.Builder;
 using Code.Unity.GameField.Palette;
 using NUnit.Framework;
@@ -12,11 +13,11 @@ namespace Tests.Unity.Palette
         [Test]
         public void NodeBuilder_BuildNodeAtGivenPosition_CreatesNode()
         {
-            var root = new GameObject().AddComponent<RectTransform>();
-            var builder = new GameObject().AddComponent<NodeBuilder>();
+            var root = new GameObject("Node builder nodes root").AddComponent<RectTransform>();
+            var builder = new GameObject("Node builder").AddComponent<NodeBuilder>();
             var prefabData = new NodesPrefabMap.NodeMapData
             {
-                Type = NodesPrefabMap.EntityType.ConnectorHorizontal,
+                Type = NodeType.ConnectorHorizontal,
                 Prefab = new GameObject("Test ConnectorHorizontal Node")
             };
             PrivateField.Set(builder, "_root", root);

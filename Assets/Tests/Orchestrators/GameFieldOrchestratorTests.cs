@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Code.Application.Orchestrators;
 using Code.Application.Ports;
+using Code.Domain;
 using Code.Unity.GameField.Palette;
 using NUnit.Framework;
 using UnityEngine;
@@ -9,7 +10,7 @@ using UnityEngine;
 namespace Tests.Orchestrators
 {
     [TestFixture]
-    public class GameFieldTests
+    public class GameFieldOrchestratorTests
     {
         [Test]
         public void GameFieldOrchestrator_UserBuildsNode()
@@ -17,7 +18,7 @@ namespace Tests.Orchestrators
             var gameFieldInput = new GameFieldInputStub();
             var gameFieldBuild = new GameFieldBuildStub();
             var gameFieldPalette = new GameFieldPaletteStub();
-            var orchestrator = new GameFieldOrchestrator(gameFieldInput, gameFieldBuild, gameFieldPalette);
+            var orchestrator = new GameFieldOrchestrator(new GameField(8, 8), gameFieldInput, gameFieldBuild, gameFieldPalette);
             
             gameFieldPalette.SelectSomeNode();
             gameFieldInput.ClickAt(new Vector2Int(2,3));
@@ -31,7 +32,7 @@ namespace Tests.Orchestrators
             var gameFieldInput = new GameFieldInputStub();
             var gameFieldBuild = new GameFieldBuildStub();
             var gameFieldPalette = new GameFieldPaletteStub();
-            var orchestrator = new GameFieldOrchestrator(gameFieldInput, gameFieldBuild, gameFieldPalette);
+            var orchestrator = new GameFieldOrchestrator(new GameField(8, 8), gameFieldInput, gameFieldBuild, gameFieldPalette);
 
             gameFieldInput.ClickAt(new Vector2Int(1,1));
 
@@ -44,7 +45,7 @@ namespace Tests.Orchestrators
             var gameFieldInput = new GameFieldInputStub();
             var gameFieldBuild = new GameFieldBuildStub();
             var gameFieldPalette = new GameFieldPaletteStub();
-            var orchestrator = new GameFieldOrchestrator(gameFieldInput, gameFieldBuild, gameFieldPalette);
+            var orchestrator = new GameFieldOrchestrator(new GameField(8, 8), gameFieldInput, gameFieldBuild, gameFieldPalette);
 
             gameFieldPalette.SelectSomeNode();
             gameFieldInput.ClickAt(new Vector2Int(0,0));
@@ -52,6 +53,21 @@ namespace Tests.Orchestrators
 
             Assert.IsTrue(gameFieldBuild.WasNodeBuiltAt(new Vector2Int(0,0)));
             Assert.IsTrue(gameFieldBuild.WasNodeBuiltAt(new Vector2Int(4,5)));
+        }
+        
+        [Test]
+        public void GameFieldOrchestrator_CantBuildOnOccupiedPlace()
+        {
+            var gameFieldInput = new GameFieldInputStub();
+            var gameFieldBuild = new GameFieldBuildStub();
+            var gameFieldPalette = new GameFieldPaletteStub();
+            var orchestrator = new GameFieldOrchestrator(new GameField(8, 8), gameFieldInput, gameFieldBuild, gameFieldPalette);
+
+            gameFieldPalette.SelectSomeNode();
+            gameFieldInput.ClickAt(new Vector2Int(4, 5));
+            gameFieldInput.ClickAt(new Vector2Int(4, 5));
+            
+            Assert.True(gameFieldBuild.TotalNodesBuilt() == 1, "Expected only one node to be built, but found: " + gameFieldBuild.TotalNodesBuilt());
         }
         
     }
@@ -84,6 +100,11 @@ namespace Tests.Orchestrators
         {
             _builds.Add(at);
             return node;
+        }
+
+        public int TotalNodesBuilt()
+        {
+            return _builds.Count;
         }
     }
 
