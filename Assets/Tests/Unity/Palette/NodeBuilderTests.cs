@@ -1,10 +1,10 @@
 ﻿using Code.Unity;
-using Code.Unity.Builder;
+using Code.Unity.GameField.Builder;
 using Code.Unity.Palette;
 using NUnit.Framework;
 using UnityEngine;
 
-namespace Tests
+namespace Tests.Unity.Palette
 {
     [TestFixture]
     public class NodeBuilderTests
@@ -21,11 +21,11 @@ namespace Tests
             };
             PrivateField.Set(builder, "_root", root);
 
-            var node = builder.Build(at: new Vector2Int(2, 3), prefab: prefabData.Prefab);
+            var node = builder.Build(at: new Vector2Int(2, 3), node: prefabData.Prefab);
             
             Assert.NotNull(node);
-            Assert.AreEqual(node.transform.localPosition.x, 100*2); // TODO: Вынести "100" в конфиги, думаю, стоит. Или константы.
-            Assert.AreEqual(node.transform.localPosition.y, 100*3);
+            Assert.AreEqual(node.transform.localPosition.x, GlobalData.CellSize * 2);
+            Assert.AreEqual(node.transform.localPosition.y, GlobalData.CellSize * 3);
         }
     }
 }

@@ -21,7 +21,6 @@ namespace Code.Unity.Palette
         {
             _button.onClick.AddListener(() => OnClicked?.Invoke(this));
             _highlight.SetActive(false);
-            Debug.Log("Constructed");
         }
 
         public void Select()

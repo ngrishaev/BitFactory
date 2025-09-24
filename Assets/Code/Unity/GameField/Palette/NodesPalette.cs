@@ -1,8 +1,9 @@
+using Code.Application.Ports;
 using UnityEngine;
 
 namespace Code.Unity.Palette
 {
-    public class NodesPalette : MonoBehaviour
+    public class NodesPalette : MonoBehaviour, IGameFieldPalette
     {
         [SerializeField] private NodesPaletteElement _horizontalConnector;
         [SerializeField] private NodesPaletteElement _lConnector;
