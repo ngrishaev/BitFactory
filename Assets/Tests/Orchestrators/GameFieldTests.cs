@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using Code.Application.Orchestrators;
 using Code.Application.Ports;
-using Code.Unity.Palette;
+using Code.Unity.GameField.Palette;
 using NUnit.Framework;
 using UnityEngine;
 

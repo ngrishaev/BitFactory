@@ -1,6 +1,6 @@
 ﻿using Code.Unity;
 using Code.Unity.GameField.Builder;
-using Code.Unity.Palette;
+using Code.Unity.GameField.Palette;
 using NUnit.Framework;
 using UnityEngine;
 

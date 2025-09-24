@@ -1,5 +1,5 @@
 using Code.Unity;
-using Code.Unity.Palette;
+using Code.Unity.GameField.Palette;
 using NUnit.Framework;
 
 namespace Tests.Unity.Palette

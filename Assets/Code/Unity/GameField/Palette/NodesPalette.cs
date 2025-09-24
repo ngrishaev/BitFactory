@@ -1,7 +1,7 @@
 using Code.Application.Ports;
 using UnityEngine;
 
-namespace Code.Unity.Palette
+namespace Code.Unity.GameField.Palette
 {
     public class NodesPalette : MonoBehaviour, IGameFieldPalette
     {

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Code.Unity.Palette
+namespace Code.Unity.GameField.Palette
 {
     [CreateAssetMenu(fileName = "NodePrefabMap", menuName = "ScriptableObjects/MapNodeDictionary", order = 1)]
     public class NodesPrefabMap: ScriptableObject

@@ -2,7 +2,7 @@
 using Code.Application.Orchestrators;
 using Code.Unity.GameField.Builder;
 using Code.Unity.GameField.Input;
-using Code.Unity.Palette;
+using Code.Unity.GameField.Palette;
 using UnityEngine;
 
 namespace Code.Unity
