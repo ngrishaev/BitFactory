@@ -8,6 +8,7 @@ namespace Code.Unity.GameField.Palette
     {
         [SerializeField] private Button _button;
         [SerializeField] private GameObject _highlight;
+        [SerializeField] private GameObject _icon;
         [SerializeField] private NodesPrefabMap.NodeMapData _nodeData;
         
         public event Action<NodesPaletteElement> OnClicked;
@@ -31,6 +32,17 @@ namespace Code.Unity.GameField.Palette
         public void Deselect()
         {
             _highlight.SetActive(false);
+        }
+
+        public void Rotate()
+        {
+            var newAngle = Mathf.RoundToInt(_icon.transform.rotation.eulerAngles.z + 90) % 360;
+            _icon.transform.rotation = Quaternion.Euler(0, 0, newAngle);
+        }
+
+        public void ResetRotation()
+        {
+            _icon.transform.rotation = Quaternion.identity;
         }
     }
 }

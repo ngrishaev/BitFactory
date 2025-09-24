@@ -1,6 +1,6 @@
-using Code.Unity;
 using Code.Unity.GameField.Palette;
 using NUnit.Framework;
+using UnityEngine;
 
 namespace Tests.Unity.Palette
 {
@@ -46,6 +46,77 @@ namespace Tests.Unity.Palette
             var elementHolder = NodesPaletteUtils.CreatePaletteElement();
             
             Assert.False(elementHolder.Highlight.activeSelf);
+        }
+        
+        [Test]
+        public void SelectableNode_Rotate1Times_ElementRotated90Degree()
+        {
+            var elementHolder = NodesPaletteUtils.CreatePaletteElement();
+            
+            elementHolder.Element.Rotate();
+            
+            Assert.True(Mathf.Approximately(elementHolder.Value.transform.rotation.eulerAngles.z, 90));
+        }
+        
+        [Test]
+        public void SelectableNode_Rotate2Times_ElementRotated180Degree()
+        {
+            var elementHolder = NodesPaletteUtils.CreatePaletteElement();
+            
+            elementHolder.Element.Rotate();
+            elementHolder.Element.Rotate();
+            
+            Assert.True(Mathf.Approximately(elementHolder.Value.transform.rotation.eulerAngles.z, 180));
+        }
+        
+        [Test]
+        public void SelectableNode_Rotate3Times_ElementRotated270Degree()
+        {
+            var elementHolder = NodesPaletteUtils.CreatePaletteElement();
+            
+            elementHolder.Element.Rotate();
+            elementHolder.Element.Rotate();
+            elementHolder.Element.Rotate();
+            
+            Assert.True(Mathf.Approximately(elementHolder.Value.transform.rotation.eulerAngles.z, 270));
+        }
+        
+        [Test]
+        public void SelectableNode_Rotate4Times_ElementRotated0Degree()
+        {
+            var elementHolder = NodesPaletteUtils.CreatePaletteElement();
+            
+            elementHolder.Element.Rotate();
+            elementHolder.Element.Rotate();
+            elementHolder.Element.Rotate();
+            elementHolder.Element.Rotate();
+            
+            Assert.True(Mathf.Approximately(elementHolder.Value.transform.rotation.eulerAngles.z, 0));
+        }
+        
+        [Test]
+        public void SelectableNode_Rotate5Times_ElementRotated90Degree()
+        {
+            var elementHolder = NodesPaletteUtils.CreatePaletteElement();
+            
+            elementHolder.Element.Rotate();
+            elementHolder.Element.Rotate();
+            elementHolder.Element.Rotate();
+            elementHolder.Element.Rotate();
+            elementHolder.Element.Rotate();
+            
+            Assert.True(Mathf.Approximately(elementHolder.Value.transform.rotation.eulerAngles.z, 90));
+        }
+        
+        [Test]
+        public void SelectableNode_RotateAndReset_ElementRotated0Degree()
+        {
+            var elementHolder = NodesPaletteUtils.CreatePaletteElement();
+            
+            elementHolder.Element.Rotate();
+            elementHolder.Element.ResetRotation();
+            
+            Assert.True(Mathf.Approximately(elementHolder.Value.transform.rotation.eulerAngles.z, 0));
         }
     }
 }

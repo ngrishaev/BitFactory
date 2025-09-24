@@ -1,4 +1,5 @@
 ﻿using NUnit.Framework;
+using UnityEngine;
 
 namespace Tests
 {
@@ -54,6 +55,19 @@ namespace Tests
             palette.HConnector.Button.onClick.Invoke();
             
             Assert.IsNull(palette.Palette.CurrentlySelectedNode());
+        }
+        
+        [Test]
+        public void NodesPalette_RotateSelectedConnectorOnce_ConnectorRotated()
+        {
+            var palette = NodesPaletteUtils.CreatePalette();
+            
+            palette.HConnector.Button.onClick.Invoke();
+            palette.LConnector.Button.onClick.Invoke();
+            palette.InputProviderStub.InvokeRKeyPressed();
+            
+            Assert.True(Mathf.Approximately(palette.LConnector.Value.transform.eulerAngles.z, 90), "LConnector wasn't rotated");
+            Assert.True(Mathf.Approximately(palette.HConnector.Value.transform.eulerAngles.z, 0), "HConnector was rotated");
         }
     }
 }

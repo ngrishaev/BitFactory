@@ -1,5 +1,8 @@
-﻿using Code.Unity;
+﻿using System;
+using Code.Unity;
+using Code.Unity.GameField.Input;
 using Code.Unity.GameField.Palette;
+using Code.Unity.Services;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -20,15 +23,32 @@ namespace Tests
             
             PrivateField.Set(holder, "_lConnector", lConnector.Element);
             PrivateField.Set(holder, "_horizontalConnector", hConnector.Element);
-            
-            holder.Construct();
+
+            var userInputProviderStub = new UserInputProviderStub();
+            holder.Construct(userInputProviderStub);
             
             return new NodesPaletteTestWrapper
             {
                 Palette = holder,
                 LConnector = lConnector,
-                HConnector = hConnector
+                HConnector = hConnector,
+                InputProviderStub = userInputProviderStub
             };
+        }
+
+        public class UserInputProviderStub : IUserInputProvider
+        {
+            public event Action OnRKeyPressed;
+            
+            public void InvokeRKeyPressed()
+            {
+                OnRKeyPressed?.Invoke();
+            }
+
+            public Vector3 MousePosition()
+            {
+                return Vector3.zero;
+            }
         }
 
         public static NodesPaletteElementTestWrapper CreatePaletteElement()
@@ -43,13 +63,18 @@ namespace Tests
             highlightGo.transform.SetParent(mainGo.transform);
             PrivateField.Set(paletteElement, "_highlight", highlightGo);
             
+            var iconGo = new GameObject();
+            iconGo.transform.SetParent(mainGo.transform);
+            PrivateField.Set(paletteElement, "_icon", iconGo);
+            
             paletteElement.Construct();
             return new NodesPaletteElementTestWrapper
             {
                 MainGo = mainGo,
                 Element = paletteElement,
                 Button = button,
-                Highlight = highlightGo
+                Highlight = highlightGo,
+                Value = iconGo
             };
         }
 
@@ -59,6 +84,7 @@ namespace Tests
             public NodesPaletteElement Element;
             public Button Button;
             public GameObject Highlight;
+            public GameObject Value;
         }
         
         public class NodesPaletteTestWrapper
@@ -66,6 +92,7 @@ namespace Tests
             public NodesPalette Palette;
             public NodesPaletteElementTestWrapper LConnector;
             public NodesPaletteElementTestWrapper HConnector;
+            public UserInputProviderStub InputProviderStub { get; set; }
         }
     }
 }

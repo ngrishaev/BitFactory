@@ -1,31 +1,35 @@
 ﻿using System;
 using Code.Application.Ports;
+using Code.Unity.Services;
 using UnityEngine;
 using UnityEngine.UI;
 
 namespace Code.Unity.GameField.Input
 {
-    // TODO: Add to tests? Need to abstract UnityEngine.Input.mousePosition
     public class GameFieldCellsInput: MonoBehaviour, IGameFieldInput
     {
         [SerializeField] private Button _gameFieldGlobalButton;
         [SerializeField] private RectTransform _root;
+        [SerializeField] private UserInputProvider _inputProvider; // TODO: Make service locator or add VContainer
         
+        private IUserInputProvider _userInputProvider;
+
         public event Action<Vector2Int> OnCellClicked; 
 
         private void Awake()
         {
-            Construct();
+            Construct(_inputProvider); 
         }
 
-        private void Construct()
+        public void Construct(IUserInputProvider userInputProvider)
         {
+            _userInputProvider = userInputProvider;
             _gameFieldGlobalButton.onClick.AddListener(OnClick);
         }
 
         private void OnClick()
         {
-            var localMousePosition = _root.InverseTransformPoint(UnityEngine.Input.mousePosition);
+            var localMousePosition = _root.InverseTransformPoint(_userInputProvider.MousePosition());
             var cellPosition = new Vector2Int(
                 Mathf.FloorToInt(localMousePosition.x / GlobalData.CellSize),
                 Mathf.FloorToInt(localMousePosition.y / GlobalData.CellSize));
