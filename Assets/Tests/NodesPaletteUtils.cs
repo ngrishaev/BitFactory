@@ -1,4 +1,5 @@
 ﻿using Code.Unity;
+using Code.Unity.Palette;
 using UnityEngine;
 using UnityEngine.UI;
 

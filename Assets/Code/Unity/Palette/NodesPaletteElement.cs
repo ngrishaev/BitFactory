@@ -2,7 +2,7 @@ using System;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Code.Unity
+namespace Code.Unity.Palette
 {
     public class NodesPaletteElement : MonoBehaviour
     {

@@ -1,7 +1,6 @@
-using System;
 using UnityEngine;
 
-namespace Code.Unity
+namespace Code.Unity.Palette
 {
     public class NodesPalette : MonoBehaviour
     {

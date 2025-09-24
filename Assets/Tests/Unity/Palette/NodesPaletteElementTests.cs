@@ -1,7 +1,8 @@
 using Code.Unity;
+using Code.Unity.Palette;
 using NUnit.Framework;
 
-namespace Tests
+namespace Tests.Unity.Palette
 {
     [TestFixture]
     public class NodesPaletteElementTests

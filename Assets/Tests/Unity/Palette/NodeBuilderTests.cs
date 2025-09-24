@@ -1,11 +1,13 @@
 ﻿using Code.Unity;
+using Code.Unity.Builder;
+using Code.Unity.Palette;
 using NUnit.Framework;
 using UnityEngine;
 
 namespace Tests
 {
     [TestFixture]
-    public class NodeBuilderTest
+    public class NodeBuilderTests
     {
         [Test]
         public void NodeBuilder_BuildNodeAtGivenPosition_CreatesNode()

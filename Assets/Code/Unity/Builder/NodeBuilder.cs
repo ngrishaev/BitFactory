@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Code.Unity
+namespace Code.Unity.Builder
 {
     public class NodeBuilder: MonoBehaviour
     {
