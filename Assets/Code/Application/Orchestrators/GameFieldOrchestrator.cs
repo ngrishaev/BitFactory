@@ -39,7 +39,7 @@ namespace Code.Application.Orchestrators
             _gameFieldNodeBuilder.Build(cellPosition, currentNode.gameObject);
         }
 
-        private static FieldNode CreateNodeFromEnum(NodesPaletteElement currentNode)
+        private static FieldNode? CreateNodeFromEnum(NodesPaletteElement currentNode)
         {
             return currentNode.NodeType() switch
             {

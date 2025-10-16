@@ -58,26 +58,29 @@ namespace Tests.Unity
             var inputProviderStub = new UserInputProviderStub();
             gameFieldInput.Construct(inputProviderStub);
 
-            return new GameFieldInputTestWrapper()
-            {
-                GameFieldInput = gameFieldInput,
-                UserInputProviderStub = inputProviderStub,
-                GameFieldInputButton = gameFieldInputButton
-            };
+            return new GameFieldInputTestWrapper(gameFieldInput: gameFieldInput,
+                userInputProviderStub: inputProviderStub, gameFieldInputButton: gameFieldInputButton);
         }
 
-        private class GameFieldInputTestWrapper
+        private sealed record GameFieldInputTestWrapper
         {
-            public GameFieldCellsInput GameFieldInput;
-            public UserInputProviderStub UserInputProviderStub;
-            public Button GameFieldInputButton;
+            public readonly GameFieldCellsInput GameFieldInput;
+            public readonly UserInputProviderStub UserInputProviderStub;
+            public readonly Button GameFieldInputButton;
+
+            public GameFieldInputTestWrapper(GameFieldCellsInput gameFieldInput, UserInputProviderStub userInputProviderStub, Button gameFieldInputButton)
+            {
+                GameFieldInput = gameFieldInput;
+                UserInputProviderStub = userInputProviderStub;
+                GameFieldInputButton = gameFieldInputButton;
+            }
         }
 
         private class UserInputProviderStub : IUserInputProvider
         {
             private Vector3 _mousePosition;
             
-            public event Action OnRKeyPressed;
+            public event Action? OnRKeyPressed;
 
             public void SetupMousePosition(Vector3 position)
             {

@@ -4,7 +4,7 @@ namespace Code.Domain
 {
     public class GameField: IField
     {
-        private readonly FieldNode[,] _field;
+        private readonly FieldNode?[,] _field;
         
         public GameField(int width, int height)
         {
@@ -16,7 +16,7 @@ namespace Code.Domain
             _field[x, y] ??= node;
         }
 
-        public FieldNode GetAt(int x, int y)
+        public FieldNode? GetAt(int x, int y)
         {
             return _field[x, y];
         }
@@ -26,7 +26,7 @@ namespace Code.Domain
             return _field[x, y] != null;
         }
 
-        public FieldNode GetNodeAt(int posX, int posY)
+        public FieldNode? GetNodeAt(int posX, int posY)
         {
             if (posX >= _field.GetLength(0) || posY >= _field.GetLength(1) || posX < 0 || posY < 0)
                 return null;

@@ -25,18 +25,16 @@ namespace Tests
             var userInputProviderStub = new UserInputProviderStub();
             holder.Construct(userInputProviderStub);
             
-            return new NodesPaletteTestWrapper
-            {
-                Palette = holder,
-                LConnector = lConnector,
-                HConnector = hConnector,
-                InputProviderStub = userInputProviderStub
-            };
+            return new NodesPaletteTestWrapper(
+                palette: holder,
+                lConnector: lConnector,
+                hConnector: hConnector,
+                inputProviderStub: userInputProviderStub);
         }
 
         public class UserInputProviderStub : IUserInputProvider
         {
-            public event Action OnRKeyPressed;
+            public event Action? OnRKeyPressed;
             
             public void InvokeRKeyPressed()
             {
@@ -64,25 +62,32 @@ namespace Tests
             var iconGo = new GameObject();
             iconGo.transform.SetParent(mainGo.transform);
             PrivateField.Set(paletteElement, "_icon", iconGo);
-            
+
             paletteElement.Construct();
-            return new NodesPaletteElementTestWrapper
-            {
-                MainGo = mainGo,
-                Element = paletteElement,
-                Button = button,
-                Highlight = highlightGo,
-                Value = iconGo
-            };
+            return new NodesPaletteElementTestWrapper(
+                mainGo: mainGo,
+                element: paletteElement,
+                button: button,
+                highlight: highlightGo,
+                value: iconGo);
         }
 
         public class NodesPaletteElementTestWrapper
         {
-            public GameObject MainGo;
-            public NodesPaletteElement Element;
-            public Button Button;
-            public GameObject Highlight;
-            public GameObject Value;
+            public readonly GameObject MainGo;
+            public readonly NodesPaletteElement Element;
+            public readonly Button Button;
+            public readonly GameObject Highlight;
+            public readonly GameObject Value;
+
+            public NodesPaletteElementTestWrapper(GameObject mainGo, NodesPaletteElement element, Button button, GameObject highlight, GameObject value)
+            {
+                MainGo = mainGo;
+                Element = element;
+                Button = button;
+                Highlight = highlight;
+                Value = value;
+            }
         }
         
         public class NodesPaletteTestWrapper
@@ -90,7 +95,15 @@ namespace Tests
             public NodesPalette Palette;
             public NodesPaletteElementTestWrapper LConnector;
             public NodesPaletteElementTestWrapper HConnector;
-            public UserInputProviderStub InputProviderStub { get; set; }
+            public UserInputProviderStub InputProviderStub;
+
+            public NodesPaletteTestWrapper(NodesPalette palette, NodesPaletteElementTestWrapper lConnector, NodesPaletteElementTestWrapper hConnector, UserInputProviderStub inputProviderStub)
+            {
+                Palette = palette;
+                LConnector = lConnector;
+                HConnector = hConnector;
+                InputProviderStub = inputProviderStub;
+            }
         }
     }
 }

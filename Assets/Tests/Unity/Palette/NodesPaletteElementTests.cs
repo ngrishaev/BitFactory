@@ -12,7 +12,7 @@ namespace Tests.Unity.Palette
         {
             var elementHolder = NodesPaletteUtils.CreatePaletteElement();
 
-            NodesPaletteElement selectedNode = null;
+            NodesPaletteElement? selectedNode = null;
             elementHolder.Element.OnClicked += (node) => { selectedNode = node; };
             elementHolder.Button.onClick.Invoke();
             
