@@ -3,20 +3,21 @@ using Code.Application.Ports;
 using Code.Unity.Services;
 using UnityEngine;
 using UnityEngine.UI;
+using NaughtyAttributes;
 
 namespace Code.Unity.GameField.Input
 {
     public class GameFieldCellsInput: MonoBehaviour, IGameFieldInput
     {
-        [SerializeField] private Button _gameFieldGlobalButton;
-        [SerializeField] private Button _tickButton;
-        [SerializeField] private RectTransform _root;
-        [SerializeField] private UserInputProvider _inputProvider; // TODO: Make service locator or add VContainer
+        [SerializeField, Required] private Button _gameFieldGlobalButton = null!;
+        [SerializeField, Required] private Button _tickButton = null!;
+        [SerializeField, Required] private RectTransform _root = null!;
+        [SerializeField, Required] private UserInputProvider _inputProvider = null!; // TODO: Make service locator or add VContainer
         
-        private IUserInputProvider _userInputProvider;
+        private IUserInputProvider _userInputProvider = null!;
 
-        public event Action<Vector2Int> OnCellClicked;
-        public event Action OnNextTickClicked;
+        public event Action<Vector2Int>? OnCellClicked;
+        public event Action? OnNextTickClicked;
 
         private void Awake()
         {
