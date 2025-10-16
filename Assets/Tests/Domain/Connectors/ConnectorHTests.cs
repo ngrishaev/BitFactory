@@ -15,48 +15,36 @@ namespace Tests.Domain.Connectors
             Assert.IsFalse(connector.HavePacket());
         }
         
-        [Test]
-        public void ReceiveFromLeftNoRotation_Accept()
+        
+        [TestCase(NodeSide.Left, Rotation.Clockwise0)]
+        [TestCase(NodeSide.Left, Rotation.Clockwise180)]
+        [TestCase(NodeSide.Right, Rotation.Clockwise0)]
+        [TestCase(NodeSide.Right, Rotation.Clockwise180)]
+        [TestCase(NodeSide.Top, Rotation.Clockwise90)]
+        [TestCase(NodeSide.Top, Rotation.Clockwise270)]
+        [TestCase(NodeSide.Bottom, Rotation.Clockwise90)]
+        [TestCase(NodeSide.Bottom, Rotation.Clockwise270)]
+        public void Receive_Accept(NodeSide fromSide, Rotation rotation)
         {
-            var connector = new ConnectorH(Rotation.Clockwise0);
+            var connector = new ConnectorH(rotation);
             
-            Assert.IsTrue(connector.TryAcceptPacketFrom(NodeSide.Left, new FieldPacket()));
+            Assert.IsTrue(connector.TryAcceptPacketFrom(fromSide, new FieldPacket()));
             Assert.IsTrue(connector.HavePacket());
         }
         
-        [Test]
-        public void ReceiveFromLeftRotation180_Accept()
+        [TestCase(NodeSide.Left, Rotation.Clockwise90)]
+        [TestCase(NodeSide.Left, Rotation.Clockwise270)]
+        [TestCase(NodeSide.Right, Rotation.Clockwise90)]
+        [TestCase(NodeSide.Right, Rotation.Clockwise270)]
+        [TestCase(NodeSide.Top, Rotation.Clockwise0)]
+        [TestCase(NodeSide.Top, Rotation.Clockwise180)]
+        [TestCase(NodeSide.Bottom, Rotation.Clockwise0)]
+        [TestCase(NodeSide.Bottom, Rotation.Clockwise180)]
+        public void Receive_Deny(NodeSide fromSide, Rotation rotation)
         {
-            var connector = new ConnectorH(Rotation.Clockwise180);
+            var connector = new ConnectorH(rotation);
             
-            Assert.IsTrue(connector.TryAcceptPacketFrom(NodeSide.Left, new FieldPacket()));
-            Assert.IsTrue(connector.HavePacket());
-        }
-        
-        [Test]
-        public void ReceiveFromLeftRotation90_NoAccept()
-        {
-            var connector = new ConnectorH(Rotation.Clockwise90);
-            
-            Assert.IsFalse(connector.TryAcceptPacketFrom(NodeSide.Left, new FieldPacket()));
-            Assert.IsFalse(connector.HavePacket());
-        }
-        
-        [Test]
-        public void ReceiveFromLeftRotation270_NoAccept()
-        {
-            var connector = new ConnectorH(Rotation.Clockwise270);
-            
-            Assert.IsFalse(connector.TryAcceptPacketFrom(NodeSide.Left, new FieldPacket()));
-            Assert.IsFalse(connector.HavePacket());
-        }
-        
-        [Test]
-        public void ReceiveFromTopRotation0_NoAccept()
-        {
-            var connector = new ConnectorH(Rotation.Clockwise0);
-            
-            Assert.IsFalse(connector.TryAcceptPacketFrom(NodeSide.Top, new FieldPacket()));
+            Assert.IsFalse(connector.TryAcceptPacketFrom(fromSide, new FieldPacket()));
             Assert.IsFalse(connector.HavePacket());
         }
     }

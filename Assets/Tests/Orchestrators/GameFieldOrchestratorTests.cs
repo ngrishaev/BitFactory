@@ -18,7 +18,7 @@ namespace Tests.Orchestrators
             var gameFieldInput = new GameFieldInputStub();
             var gameFieldBuild = new GameFieldNodeBuilderStub();
             var gameFieldPalette = new GameFieldPaletteStub();
-            var orchestrator = new GameFieldOrchestrator(new GameField(8, 8), gameFieldInput, gameFieldBuild, gameFieldPalette);
+            var unused = new GameFieldOrchestrator(new GameField(8, 8), gameFieldInput, gameFieldBuild, gameFieldPalette);
             
             gameFieldPalette.SelectSomeNode();
             gameFieldInput.ClickAt(new Vector2Int(2,3));
@@ -32,7 +32,7 @@ namespace Tests.Orchestrators
             var gameFieldInput = new GameFieldInputStub();
             var gameFieldBuild = new GameFieldNodeBuilderStub();
             var gameFieldPalette = new GameFieldPaletteStub();
-            var orchestrator = new GameFieldOrchestrator(new GameField(8, 8), gameFieldInput, gameFieldBuild, gameFieldPalette);
+            var unused = new GameFieldOrchestrator(new GameField(8, 8), gameFieldInput, gameFieldBuild, gameFieldPalette);
 
             gameFieldInput.ClickAt(new Vector2Int(1,1));
 
@@ -45,7 +45,7 @@ namespace Tests.Orchestrators
             var gameFieldInput = new GameFieldInputStub();
             var gameFieldBuild = new GameFieldNodeBuilderStub();
             var gameFieldPalette = new GameFieldPaletteStub();
-            var orchestrator = new GameFieldOrchestrator(new GameField(8, 8), gameFieldInput, gameFieldBuild, gameFieldPalette);
+            var unused = new GameFieldOrchestrator(new GameField(8, 8), gameFieldInput, gameFieldBuild, gameFieldPalette);
 
             gameFieldPalette.SelectSomeNode();
             gameFieldInput.ClickAt(new Vector2Int(0,0));
@@ -61,7 +61,7 @@ namespace Tests.Orchestrators
             var gameFieldInput = new GameFieldInputStub();
             var gameFieldBuild = new GameFieldNodeBuilderStub();
             var gameFieldPalette = new GameFieldPaletteStub();
-            var orchestrator = new GameFieldOrchestrator(new GameField(8, 8), gameFieldInput, gameFieldBuild, gameFieldPalette);
+            var unused = new GameFieldOrchestrator(new GameField(8, 8), gameFieldInput, gameFieldBuild, gameFieldPalette);
 
             gameFieldPalette.SelectSomeNode();
             gameFieldInput.ClickAt(new Vector2Int(4, 5));
@@ -74,14 +74,14 @@ namespace Tests.Orchestrators
 
     public class GameFieldPaletteStub : IGameFieldPalette
     {
-        private NodesPaletteElement _selectedNode;
+        private NodesPaletteElement? _selectedNode;
         
         public void SelectSomeNode()
         {
             _selectedNode = NodesPaletteUtils.CreatePaletteElement().Element;
         }
 
-        public NodesPaletteElement CurrentlySelectedNode()
+        public NodesPaletteElement? CurrentlySelectedNode()
         {
             return _selectedNode;
         }
@@ -110,8 +110,8 @@ namespace Tests.Orchestrators
 
     public class GameFieldInputStub : IGameFieldInput
     {
-        public event Action<Vector2Int> OnCellClicked;
-        public event Action OnNextTickClicked;
+        public event Action<Vector2Int>? OnCellClicked;
+        public event Action? OnNextTickClicked;
 
         public void ClickAt(Vector2Int vector2Int)
         {

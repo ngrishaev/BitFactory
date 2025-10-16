@@ -1,6 +1,4 @@
 ﻿using System;
-using Code.Unity;
-using Code.Unity.GameField.Input;
 using Code.Unity.GameField.Palette;
 using Code.Unity.Services;
 using UnityEngine;
