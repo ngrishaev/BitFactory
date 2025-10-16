@@ -16,7 +16,7 @@ namespace Tests.Orchestrators
         public void GameFieldOrchestrator_UserBuildsNode()
         {
             var gameFieldInput = new GameFieldInputStub();
-            var gameFieldBuild = new GameFieldBuildStub();
+            var gameFieldBuild = new GameFieldNodeBuilderStub();
             var gameFieldPalette = new GameFieldPaletteStub();
             var orchestrator = new GameFieldOrchestrator(new GameField(8, 8), gameFieldInput, gameFieldBuild, gameFieldPalette);
             
@@ -30,7 +30,7 @@ namespace Tests.Orchestrators
         public void GameFieldOrchestrator_NoNodeSelected_NoBuild()
         {
             var gameFieldInput = new GameFieldInputStub();
-            var gameFieldBuild = new GameFieldBuildStub();
+            var gameFieldBuild = new GameFieldNodeBuilderStub();
             var gameFieldPalette = new GameFieldPaletteStub();
             var orchestrator = new GameFieldOrchestrator(new GameField(8, 8), gameFieldInput, gameFieldBuild, gameFieldPalette);
 
@@ -43,7 +43,7 @@ namespace Tests.Orchestrators
         public void GameFieldOrchestrator_MultipleClicks_BuildsEverywhere()
         {
             var gameFieldInput = new GameFieldInputStub();
-            var gameFieldBuild = new GameFieldBuildStub();
+            var gameFieldBuild = new GameFieldNodeBuilderStub();
             var gameFieldPalette = new GameFieldPaletteStub();
             var orchestrator = new GameFieldOrchestrator(new GameField(8, 8), gameFieldInput, gameFieldBuild, gameFieldPalette);
 
@@ -59,7 +59,7 @@ namespace Tests.Orchestrators
         public void GameFieldOrchestrator_CantBuildOnOccupiedPlace()
         {
             var gameFieldInput = new GameFieldInputStub();
-            var gameFieldBuild = new GameFieldBuildStub();
+            var gameFieldBuild = new GameFieldNodeBuilderStub();
             var gameFieldPalette = new GameFieldPaletteStub();
             var orchestrator = new GameFieldOrchestrator(new GameField(8, 8), gameFieldInput, gameFieldBuild, gameFieldPalette);
 
@@ -87,7 +87,7 @@ namespace Tests.Orchestrators
         }
     }
 
-    public class GameFieldBuildStub : IGameFieldBuild
+    public class GameFieldNodeBuilderStub : IGameFieldNodeBuilder
     {
         private List<Vector2Int> _builds = new List<Vector2Int>();
         
@@ -111,7 +111,8 @@ namespace Tests.Orchestrators
     public class GameFieldInputStub : IGameFieldInput
     {
         public event Action<Vector2Int> OnCellClicked;
-        
+        public event Action OnNextTickClicked;
+
         public void ClickAt(Vector2Int vector2Int)
         {
             OnCellClicked?.Invoke(vector2Int);

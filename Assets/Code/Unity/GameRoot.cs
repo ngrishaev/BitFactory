@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using Code.Application.Orchestrators;
+using Code.Domain;
 using Code.Unity.GameField.Builder;
 using Code.Unity.GameField.Input;
 using Code.Unity.GameField.Palette;
@@ -16,7 +18,10 @@ namespace Code.Unity
         private void Start()
         {
             var gameField = new Domain.GameField(8, 8);
-            var orchestration = new GameFieldOrchestrator(gameField, _input, _builder, _palette);
+            var gameFieldOrchestrator = new GameFieldOrchestrator(gameField, _input, _builder, _palette);
+            var spawners = new HashSet<Spawner>();
+            spawners.Add(new Spawner(gameField));
+            var packageOrchestrator = new PackageOrchestrator(spawners, _input);
         }
     }
 }

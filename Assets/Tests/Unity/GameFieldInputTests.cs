@@ -6,7 +6,7 @@ using NUnit.Framework;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Tests
+namespace Tests.Unity
 {
     [TestFixture]
     public class GameFieldInputTests

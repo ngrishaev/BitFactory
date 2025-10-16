@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Code.Unity.GameField.Builder
 {
-    public class NodeBuilder: MonoBehaviour, IGameFieldBuild
+    public class NodeBuilder: MonoBehaviour, IGameFieldNodeBuilder
     {
         [SerializeField] private RectTransform _root;
         

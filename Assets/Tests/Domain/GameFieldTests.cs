@@ -1,4 +1,5 @@
 ﻿using Code.Domain;
+using Code.Domain.Nodes;
 using NUnit.Framework;
 
 namespace Tests.Domain
@@ -11,7 +12,7 @@ namespace Tests.Domain
         {
             var field = new GameField(8, 8);
 
-            var fieldNode = new FieldNode() { Type = NodeType.ConnectorHorizontal, Rotation = Rotation.None };
+            var fieldNode = new ConnectorH(Rotation.Clockwise0);
             field.SetNode(0, 0, fieldNode);
             var returnedNode = field.GetAt(0, 0);
             

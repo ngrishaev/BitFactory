@@ -1,5 +1,7 @@
 ﻿using Code.Application.Ports;
 using Code.Domain;
+using Code.Domain.Nodes;
+using Code.Unity.GameField.Palette;
 using UnityEngine;
 
 namespace Code.Application.Orchestrators
@@ -7,17 +9,17 @@ namespace Code.Application.Orchestrators
     public class GameFieldOrchestrator
     {
         private readonly GameField _gameField;
-        private readonly IGameFieldBuild _gameFieldBuild;
+        private readonly IGameFieldNodeBuilder _gameFieldNodeBuilder;
         private readonly IGameFieldPalette _gameFieldPalette;
 
         public GameFieldOrchestrator(
             GameField gameField,
             IGameFieldInput gameFieldInput,
-            IGameFieldBuild gameFieldBuild,
+            IGameFieldNodeBuilder gameFieldNodeBuilder,
             IGameFieldPalette gameFieldPalette)
         {
             _gameField = gameField;
-            _gameFieldBuild = gameFieldBuild;
+            _gameFieldNodeBuilder = gameFieldNodeBuilder;
             _gameFieldPalette = gameFieldPalette;
             gameFieldInput.OnCellClicked += CellClicked;
         }
@@ -29,18 +31,22 @@ namespace Code.Application.Orchestrators
                 return;
             
             if (_gameField.Occupied(cellPosition.x, cellPosition.y))
-            {
                 return;
-            }
             
-            var fieldNode = new FieldNode
-            {
-                Type = currentNode.NodeType(),
-                Rotation = currentNode.Rotation()
-            };
+            var fieldNode = CreateNodeFromEnum(currentNode);
             _gameField.SetNode(cellPosition.x, cellPosition.y, fieldNode);
-            // TODO: `CurrentlySelectedNode().gameObject` - NOPE
-            _gameFieldBuild.Build(cellPosition, currentNode.gameObject);
+            // TODO: `someNode.gameObject` - NOPE
+            _gameFieldNodeBuilder.Build(cellPosition, currentNode.gameObject);
+        }
+
+        private static FieldNode CreateNodeFromEnum(NodesPaletteElement currentNode)
+        {
+            return currentNode.NodeType() switch
+            {
+                NodeType.ConnectorHorizontal => new ConnectorH(currentNode.Rotation()),
+                NodeType.ConnectorL => new ConnectorL(currentNode.Rotation()),
+                _ => null
+            };
         }
     }
 }

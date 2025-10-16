@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Code.Domain;
+using Code.Domain.Nodes;
 using UnityEngine;
 
 namespace Code.Unity.GameField.Palette
@@ -46,7 +47,5 @@ namespace Code.Unity.GameField.Palette
             public NodeType Type;
             public GameObject Prefab;
         }
-        
-
     }
 }

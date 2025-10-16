@@ -1,7 +1,7 @@
 ﻿using NUnit.Framework;
 using UnityEngine;
 
-namespace Tests
+namespace Tests.Unity.Palette
 {
     [TestFixture]
     public class NodesPaletteTests
@@ -66,7 +66,8 @@ namespace Tests
             palette.LConnector.Button.onClick.Invoke();
             palette.InputProviderStub.InvokeRKeyPressed();
             
-            Assert.True(Mathf.Approximately(palette.LConnector.Value.transform.eulerAngles.z, 90), "LConnector wasn't rotated");
+            // TODO: Refactor rotation with enum
+            Assert.True(Mathf.Approximately(palette.LConnector.Value.transform.eulerAngles.z, 270), "LConnector wasn't rotated");
             Assert.True(Mathf.Approximately(palette.HConnector.Value.transform.eulerAngles.z, 0), "HConnector was rotated");
         }
     }

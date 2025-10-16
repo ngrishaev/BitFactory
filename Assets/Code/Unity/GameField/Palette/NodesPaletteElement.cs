@@ -1,5 +1,6 @@
 using System;
 using Code.Domain;
+using Code.Domain.Nodes;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -39,10 +40,10 @@ namespace Code.Unity.GameField.Palette
         {
             return degrees switch
             {
-                0 => Domain.Rotation.None,
-                -90 => Domain.Rotation.Clockwise90,
-                -180 => Domain.Rotation.Clockwise180,
-                -270 => Domain.Rotation.Clockwise270,
+                0 => Domain.Nodes.Rotation.Clockwise0,
+                90 => Domain.Nodes.Rotation.Clockwise270,
+                180 => Domain.Nodes.Rotation.Clockwise180,
+                270 => Domain.Nodes.Rotation.Clockwise90,
                 _ => throw new ArgumentOutOfRangeException(nameof(degrees), degrees, null)
             };
         }

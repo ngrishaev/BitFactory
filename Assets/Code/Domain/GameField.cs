@@ -1,8 +1,10 @@
-﻿namespace Code.Domain
+﻿using Code.Domain.Nodes;
+
+namespace Code.Domain
 {
-    public class GameField
+    public class GameField: IField
     {
-        private FieldNode[,] _field;
+        private readonly FieldNode[,] _field;
         
         public GameField(int width, int height)
         {
@@ -23,25 +25,13 @@
         {
             return _field[x, y] != null;
         }
-    }
-    
-    public enum NodeType
-    {
-        ConnectorHorizontal,
-        ConnectorL
-    }
-        
-    public enum Rotation
-    {
-        None,
-        Clockwise90,
-        Clockwise180,
-        Clockwise270
-    }
 
-    public class FieldNode
-    {
-        public NodeType Type;
-        public Rotation Rotation;
+        public FieldNode GetNodeAt(int posX, int posY)
+        {
+            if (posX >= _field.GetLength(0) || posY >= _field.GetLength(1) || posX < 0 || posY < 0)
+                return null;
+            
+            return _field[posX, posY];
+        }
     }
 }
