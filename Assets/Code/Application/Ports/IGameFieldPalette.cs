@@ -5,6 +5,6 @@ namespace Code.Application.Ports
 {
     public interface IGameFieldPalette
     {
-        NodesPaletteElement CurrentlySelectedNode();
+        NodesPaletteElement? CurrentlySelectedNode();
     }
 }

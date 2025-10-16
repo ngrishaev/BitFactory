@@ -1,6 +1,6 @@
 using System;
-using Code.Domain;
 using Code.Domain.Nodes;
+using NaughtyAttributes;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -8,12 +8,12 @@ namespace Code.Unity.GameField.Palette
 {
     public class NodesPaletteElement : MonoBehaviour
     {
-        [SerializeField] private Button _button;
-        [SerializeField] private GameObject _highlight;
-        [SerializeField] private GameObject _icon;
+        [SerializeField, Required] private Button _button = null!;
+        [SerializeField, Required] private GameObject _highlight = null!;
+        [SerializeField, Required] private GameObject _icon = null!;
         [SerializeField] private NodesPrefabMap.NodeMapData _nodeData;
         
-        public event Action<NodesPaletteElement> OnClicked;
+        public event Action<NodesPaletteElement>? OnClicked;
 
         private void Awake()
         {

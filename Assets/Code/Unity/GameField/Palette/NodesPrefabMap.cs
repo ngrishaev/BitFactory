@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using Code.Domain;
 using Code.Domain.Nodes;
 using UnityEngine;
 
@@ -12,7 +11,7 @@ namespace Code.Unity.GameField.Palette
         [SerializeField] private List<NodeMapData> _nodePrefabs = new();
         private readonly Dictionary<NodeType, GameObject> _typeToPrefabDictionary = new();
 
-        public GameObject GetPrefab(NodeType id)
+        public GameObject? GetPrefab(NodeType id)
         {
             if(_typeToPrefabDictionary.Count == 0)
             {

@@ -1,17 +1,20 @@
 using Code.Application.Ports;
 using Code.Unity.GameField.Input;
 using Code.Unity.Services;
+using NaughtyAttributes;
 using UnityEngine;
 
 namespace Code.Unity.GameField.Palette
 {
     public class NodesPalette : MonoBehaviour, IGameFieldPalette
     {
-        [SerializeField] private NodesPaletteElement _horizontalConnector;
-        [SerializeField] private NodesPaletteElement _lConnector;
-        [SerializeField] private UserInputProvider _inputProvider; // TODO: Make service locator or add VContainer
-        private NodesPaletteElement _currentElement;
-        private IUserInputProvider _userInputProvider;
+        [SerializeField, Required] private NodesPaletteElement _horizontalConnector = null!;
+        [SerializeField, Required] private NodesPaletteElement _lConnector = null!;
+        // TODO: Make service locator or add VContainer
+        [SerializeField, Required] private UserInputProvider _inputProvider = null!;
+        
+        private IUserInputProvider _userInputProvider = null!;
+        private NodesPaletteElement? _currentElement;
 
         private void Awake()
         {
@@ -48,7 +51,7 @@ namespace Code.Unity.GameField.Palette
             _currentElement.Select();
         }
 
-        public NodesPaletteElement CurrentlySelectedNode()
+        public NodesPaletteElement? CurrentlySelectedNode()
         {
             return _currentElement;
         }

@@ -1,11 +1,12 @@
 ﻿using Code.Application.Ports;
+using NaughtyAttributes;
 using UnityEngine;
 
 namespace Code.Unity.GameField.Builder
 {
     public class NodeBuilder: MonoBehaviour, IGameFieldNodeBuilder
     {
-        [SerializeField] private RectTransform _root;
+        [SerializeField, Required] private RectTransform _root = null!;
         
         public GameObject Build(Vector2Int at, GameObject node)
         {

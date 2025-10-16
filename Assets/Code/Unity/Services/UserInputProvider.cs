@@ -6,7 +6,7 @@ namespace Code.Unity.Services
 {
     public class UserInputProvider : MonoBehaviour, IUserInputProvider
     {
-        public event Action OnRKeyPressed;
+        public event Action? OnRKeyPressed;
         
         private void Update()
         {

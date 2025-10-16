@@ -5,7 +5,7 @@ namespace Code.Unity.Services
 {
     public interface IUserInputProvider
     {
-        event Action OnRKeyPressed;
+        event Action? OnRKeyPressed;
         
         Vector3 MousePosition();
     }
