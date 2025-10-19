@@ -1,5 +1,4 @@
 ﻿using Code.Unity.GameField.Palette;
-using UnityEngine;
 
 namespace Code.Application.Ports
 {

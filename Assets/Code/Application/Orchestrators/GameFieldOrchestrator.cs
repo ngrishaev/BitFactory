@@ -34,6 +34,11 @@ namespace Code.Application.Orchestrators
                 return;
             
             var fieldNode = CreateNodeFromEnum(currentNode);
+            if (fieldNode == null)
+            {
+                Debug.LogError("Cannot find node for the selected palette element: " + currentNode.NodeType());
+                return;
+            }
             _gameField.SetNode(cellPosition.x, cellPosition.y, fieldNode);
             // TODO: `someNode.gameObject` - NOPE
             _gameFieldNodeBuilder.Build(cellPosition, currentNode.gameObject);

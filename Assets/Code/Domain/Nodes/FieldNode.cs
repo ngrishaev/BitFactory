@@ -5,26 +5,24 @@
         // TODO: Should be incapsulated
         public NodeType Type;
         public Rotation Rotation;
-        protected FieldPacket Packet;
+        private FieldPacket? _packet;
 
         protected abstract bool CanAcceptPacketFrom(NodeSide side);
-
-        // TODO: Generate tests on that
+        
         public bool TryAcceptPacketFrom(NodeSide side, FieldPacket packet)
         {
             if (CanAcceptPacketFrom(side))
             {
-                Packet = packet;
+                _packet = packet;
                 return true;
             }
 
             return false;
         }
-
-        // TODO: Generate tests on that
+        
         public bool HavePacket()
         {
-            return Packet != null;
+            return _packet != null;
         }
     }
 }

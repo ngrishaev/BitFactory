@@ -47,19 +47,33 @@ namespace Tests.Unity
             var gameFieldInputGo = new GameObject();
             var gameFieldRect = gameFieldInputGo.AddComponent<RectTransform>();
             var gameFieldInput = gameFieldInputGo.AddComponent<GameFieldCellsInput>();
-            var gameFieldInputButton = gameFieldInputGo.AddComponent<Button>();
+            var buttonsHolder = new GameObject("ButtonsHolder");
+            buttonsHolder.transform.SetParent(gameFieldInputGo.transform, false);
+            
+            var gameFieldInputButton = MakeButton("Input Button");
+            var gameFieldTickButton = MakeButton("Tick Button");
             
             gameFieldRect.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, 800f);
             gameFieldRect.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, 800f);
             
             PrivateField.Set(gameFieldInput, "_root", gameFieldRect);
             PrivateField.Set(gameFieldInput, "_gameFieldGlobalButton", gameFieldInputButton);
+            PrivateField.Set(gameFieldInput, "_tickButton", gameFieldTickButton);
             
             var inputProviderStub = new UserInputProviderStub();
             gameFieldInput.Construct(inputProviderStub);
 
-            return new GameFieldInputTestWrapper(gameFieldInput: gameFieldInput,
-                userInputProviderStub: inputProviderStub, gameFieldInputButton: gameFieldInputButton);
+            return new GameFieldInputTestWrapper(
+                gameFieldInput: gameFieldInput,
+                userInputProviderStub: inputProviderStub,
+                gameFieldInputButton: gameFieldInputButton);
+
+            Button MakeButton(string buttonName)
+            {
+                var inputButtonGo = new GameObject(buttonName);
+                inputButtonGo.transform.SetParent(buttonsHolder.transform, false);
+                return inputButtonGo.AddComponent<Button>();
+            }
         }
 
         private sealed record GameFieldInputTestWrapper

@@ -1,5 +1,4 @@
 using Code.Application.Ports;
-using Code.Unity.GameField.Input;
 using Code.Unity.Services;
 using NaughtyAttributes;
 using UnityEngine;
