@@ -1,5 +1,6 @@
 using System;
 using Code.Domain.Nodes;
+using Code.Unity.GameField.Nodes;
 using NaughtyAttributes;
 using UnityEngine;
 using UnityEngine.UI;
@@ -14,6 +15,7 @@ namespace Code.Unity.GameField.Palette
         [SerializeField] private NodesPrefabMap.NodeMapData _nodeData;
         
         public event Action<NodesPaletteElement>? OnClicked;
+        public NodeDisplay Node => _nodeData.Prefab;
 
         private void Awake()
         {

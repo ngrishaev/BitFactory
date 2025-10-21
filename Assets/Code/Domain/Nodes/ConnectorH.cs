@@ -2,13 +2,13 @@
 {
     public class ConnectorH : FieldNode
     {
-        public ConnectorH(Rotation rotation)
+        public ConnectorH(Rotation rotation, Position position) : base(position)
         {
             Rotation = rotation;
             Type = NodeType.ConnectorHorizontal;
         }
-        
-        protected override bool CanAcceptPacketFrom(NodeSide side)
+
+        public override bool CanAcceptPacketFrom(NodeSide side)
         {
             if (HavePacket())
             {

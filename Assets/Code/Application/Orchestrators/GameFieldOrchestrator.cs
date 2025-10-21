@@ -1,4 +1,5 @@
-﻿using Code.Application.Ports;
+﻿using Code.Application.Common;
+using Code.Application.Ports;
 using Code.Domain;
 using Code.Domain.Nodes;
 using Code.Unity.GameField.Palette;
@@ -26,30 +27,30 @@ namespace Code.Application.Orchestrators
 
         private void CellClicked(Vector2Int cellPosition)
         {
-            var currentNode = _gameFieldPalette.CurrentlySelectedNode();
-            if(currentNode is null)
+            var paletteElement = _gameFieldPalette.CurrentlySelected();
+            if(paletteElement is null)
                 return;
             
-            if (_gameField.Occupied(cellPosition.x, cellPosition.y))
+            if (_gameField.Occupied(cellPosition.ToPosition()))
                 return;
             
-            var fieldNode = CreateNodeFromEnum(currentNode);
+            var fieldNode = CreateNodeFromEnum(paletteElement, cellPosition.ToPosition());
             if (fieldNode == null)
             {
-                Debug.LogError("Cannot find node for the selected palette element: " + currentNode.NodeType());
+                Debug.LogError("Cannot find node for the selected palette element: " + paletteElement.NodeType());
                 return;
             }
-            _gameField.SetNode(cellPosition.x, cellPosition.y, fieldNode);
+            _gameField.SetNode(cellPosition.ToPosition(), fieldNode);
             // TODO: `someNode.gameObject` - NOPE
-            _gameFieldNodeBuilder.Build(cellPosition, currentNode.gameObject);
+            _gameFieldNodeBuilder.Build(cellPosition.ToPosition(), paletteElement.Node);
         }
 
-        private static FieldNode? CreateNodeFromEnum(NodesPaletteElement currentNode)
+        private static FieldNode? CreateNodeFromEnum(NodesPaletteElement currentNode, Position position)
         {
             return currentNode.NodeType() switch
             {
-                NodeType.ConnectorHorizontal => new ConnectorH(currentNode.Rotation()),
-                NodeType.ConnectorL => new ConnectorL(currentNode.Rotation()),
+                NodeType.ConnectorHorizontal => new ConnectorH(currentNode.Rotation(), position),
+                NodeType.ConnectorL => new ConnectorL(currentNode.Rotation(), position),
                 _ => null
             };
         }

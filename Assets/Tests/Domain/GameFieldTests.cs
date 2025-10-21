@@ -12,9 +12,9 @@ namespace Tests.Domain
         {
             var field = new GameField(8, 8);
 
-            var fieldNode = new ConnectorH(Rotation.Clockwise0);
-            field.SetNode(0, 0, fieldNode);
-            var returnedNode = field.GetAt(0, 0);
+            var fieldNode = new ConnectorH(Rotation.Clockwise0, Position.Zero);
+            field.SetNode(Position.Zero, fieldNode);
+            var returnedNode = field.GetAt(Position.Zero);
             
             Assert.AreSame(returnedNode, fieldNode);
         }
@@ -24,7 +24,7 @@ namespace Tests.Domain
         {
             var field = new GameField(8, 8);
             
-            var returnedNode = field.GetAt(0, 0);
+            var returnedNode = field.GetAt(Position.Zero);
             
             Assert.IsNull(returnedNode);
         }

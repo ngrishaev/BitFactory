@@ -11,7 +11,7 @@ namespace Tests.Unity.Palette
         {
             var palette = NodesPaletteUtils.CreatePalette();
             
-            Assert.IsNull(palette.Palette.CurrentlySelectedNode());
+            Assert.IsNull(palette.Palette.CurrentlySelected());
         }
         
         
@@ -22,7 +22,7 @@ namespace Tests.Unity.Palette
             
             palette.HConnector.Button.onClick.Invoke();
             
-            Assert.IsTrue(palette.Palette.CurrentlySelectedNode() == palette.HConnector.Element);
+            Assert.IsTrue(palette.Palette.CurrentlySelected() == palette.HConnector.Element);
         }
         
         [Test]
@@ -32,7 +32,7 @@ namespace Tests.Unity.Palette
             
             palette.LConnector.Button.onClick.Invoke();
             
-            Assert.IsTrue(palette.Palette.CurrentlySelectedNode() == palette.LConnector.Element);
+            Assert.IsTrue(palette.Palette.CurrentlySelected() == palette.LConnector.Element);
         }
         
         [Test]
@@ -43,7 +43,7 @@ namespace Tests.Unity.Palette
             palette.HConnector.Button.onClick.Invoke();
             palette.LConnector.Button.onClick.Invoke();
             
-            Assert.IsTrue(palette.Palette.CurrentlySelectedNode() == palette.LConnector.Element);
+            Assert.IsTrue(palette.Palette.CurrentlySelected() == palette.LConnector.Element);
         }
         
         [Test]
@@ -54,7 +54,7 @@ namespace Tests.Unity.Palette
             palette.HConnector.Button.onClick.Invoke();
             palette.HConnector.Button.onClick.Invoke();
             
-            Assert.IsNull(palette.Palette.CurrentlySelectedNode());
+            Assert.IsNull(palette.Palette.CurrentlySelected());
         }
         
         [Test]

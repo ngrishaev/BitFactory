@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3428062918539402877}
+  - component: {fileID: -3695333876009878155}
   m_Layer: 5
   m_Name: Connector_L
   m_TagString: Untagged
@@ -36,6 +37,18 @@ RectTransform:
   m_AnchoredPosition: {x: -310.00012, y: 410.00006}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &-3695333876009878155
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3296784897018374174}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce39eae4f4fc4917a721f824997c039a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Code::Code.Unity.GameField.Nodes.LConnector
 --- !u!1 &7390658086542886731
 GameObject:
   m_ObjectHideFlags: 0

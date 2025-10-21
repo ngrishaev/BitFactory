@@ -1,17 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using Code.Domain.Nodes;
+using Code.Unity.GameField.Nodes;
 using UnityEngine;
 
 namespace Code.Unity.GameField.Palette
 {
+    [ExcludeFromCodeCoverage]
     [CreateAssetMenu(fileName = "NodePrefabMap", menuName = "ScriptableObjects/MapNodeDictionary", order = 1)]
     public class NodesPrefabMap: ScriptableObject
     {
         [SerializeField] private List<NodeMapData> _nodePrefabs = new();
-        private readonly Dictionary<NodeType, GameObject> _typeToPrefabDictionary = new();
+        private readonly Dictionary<NodeType, NodeDisplay> _typeToPrefabDictionary = new();
 
-        public GameObject? GetPrefab(NodeType id)
+        public NodeDisplay? GetPrefab(NodeType id)
         {
             if(_typeToPrefabDictionary.Count == 0)
             {
@@ -44,7 +47,7 @@ namespace Code.Unity.GameField.Palette
         public struct NodeMapData
         {
             public NodeType Type;
-            public GameObject Prefab;
+            public NodeDisplay Prefab;
         }
     }
 }

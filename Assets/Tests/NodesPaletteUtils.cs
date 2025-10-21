@@ -1,4 +1,6 @@
 ﻿using System;
+using Code.Domain.Nodes;
+using Code.Unity.GameField.Nodes;
 using Code.Unity.GameField.Palette;
 using Code.Unity.Services;
 using UnityEngine;
@@ -62,6 +64,13 @@ namespace Tests
             var iconGo = new GameObject();
             iconGo.transform.SetParent(mainGo.transform);
             PrivateField.Set(paletteElement, "_icon", iconGo);
+            
+            var prefabData = new NodesPrefabMap.NodeMapData
+            {
+                Type = NodeType.ConnectorHorizontal,
+                Prefab = new GameObject("Test ConnectorHorizontal Node").AddComponent<HorizontalConnector>()
+            };
+            PrivateField.Set(paletteElement, "_nodeData", prefabData);
 
             paletteElement.Construct();
             return new NodesPaletteElementTestWrapper(
@@ -80,7 +89,12 @@ namespace Tests
             public readonly GameObject Highlight;
             public readonly GameObject Value;
 
-            public NodesPaletteElementTestWrapper(GameObject mainGo, NodesPaletteElement element, Button button, GameObject highlight, GameObject value)
+            public NodesPaletteElementTestWrapper(
+                GameObject mainGo,
+                NodesPaletteElement element,
+                Button button,
+                GameObject highlight,
+                GameObject value)
             {
                 MainGo = mainGo;
                 Element = element;

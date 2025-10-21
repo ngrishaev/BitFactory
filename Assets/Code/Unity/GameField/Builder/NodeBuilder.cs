@@ -1,4 +1,6 @@
 ﻿using Code.Application.Ports;
+using Code.Domain;
+using Code.Unity.GameField.Nodes;
 using NaughtyAttributes;
 using UnityEngine;
 
@@ -7,11 +9,18 @@ namespace Code.Unity.GameField.Builder
     public class NodeBuilder: MonoBehaviour, IGameFieldNodeBuilder
     {
         [SerializeField, Required] private RectTransform _root = null!;
-        
-        public GameObject Build(Vector2Int at, GameObject node)
+        private INodesRegistry _nodesRegistry = null!;
+
+        public void Construct(INodesRegistry nodesRegistry)
+        {
+            _nodesRegistry = nodesRegistry;
+        }
+
+        public TNodeType Build<TNodeType>(Position at, TNodeType node) where TNodeType : NodeDisplay
         {
             var instantiatedNode = Instantiate(node, _root);
-            instantiatedNode.transform.localPosition = new Vector3(at.x * GlobalData.CellSize, at.y * GlobalData.CellSize, _root.transform.localPosition.z);
+            instantiatedNode.transform.localPosition = new Vector3(at.X * GlobalData.CellSize, at.Y * GlobalData.CellSize, _root.transform.localPosition.z);
+            _nodesRegistry.Set(at, instantiatedNode);
             return instantiatedNode;
         }
     }

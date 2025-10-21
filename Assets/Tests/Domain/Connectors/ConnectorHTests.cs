@@ -10,7 +10,7 @@ namespace Tests.Domain.Connectors
         [Test]
         public void NewlyCreatedNodesHaveNoPacket_Pass()
         {
-            var connector = new ConnectorH(Rotation.Clockwise0);
+            var connector = new ConnectorH(Rotation.Clockwise0, Position.Zero);
             
             Assert.IsFalse(connector.HavePacket());
         }
@@ -26,7 +26,7 @@ namespace Tests.Domain.Connectors
         [TestCase(NodeSide.Bottom, Rotation.Clockwise270)]
         public void Receive_Accept(NodeSide fromSide, Rotation rotation)
         {
-            var connector = new ConnectorH(rotation);
+            var connector = new ConnectorH(rotation, Position.Zero);
             
             Assert.IsTrue(connector.TryAcceptPacketFrom(fromSide, new FieldPacket()));
             Assert.IsTrue(connector.HavePacket());
@@ -42,10 +42,22 @@ namespace Tests.Domain.Connectors
         [TestCase(NodeSide.Bottom, Rotation.Clockwise180)]
         public void Receive_Deny(NodeSide fromSide, Rotation rotation)
         {
-            var connector = new ConnectorH(rotation);
+            var connector = new ConnectorH(rotation, Position.Zero);
             
             Assert.IsFalse(connector.TryAcceptPacketFrom(fromSide, new FieldPacket()));
             Assert.IsFalse(connector.HavePacket());
+        }
+        
+        [Test]
+        public void NodeCannotAcceptPacketIfItIsAlreadyHavePacket()
+        {
+            var connector = new ConnectorH(Rotation.Clockwise180, Position.Zero);
+            
+            Assert.IsFalse(connector.HavePacket());
+            Assert.IsTrue(connector.TryAcceptPacketFrom(NodeSide.Left, new FieldPacket()));
+            Assert.IsTrue(connector.HavePacket());
+            Assert.IsFalse(connector.TryAcceptPacketFrom(NodeSide.Left, new FieldPacket()));
+            Assert.IsTrue(connector.HavePacket());
         }
     }
 }

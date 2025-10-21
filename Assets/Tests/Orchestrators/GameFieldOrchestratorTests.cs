@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Code.Application.Orchestrators;
 using Code.Application.Ports;
 using Code.Domain;
+using Code.Unity.GameField.Nodes;
 using Code.Unity.GameField.Palette;
 using NUnit.Framework;
 using UnityEngine;
@@ -23,7 +24,7 @@ namespace Tests.Orchestrators
             gameFieldPalette.SelectSomeNode();
             gameFieldInput.ClickAt(new Vector2Int(2,3));
             
-            Assert.IsTrue(gameFieldBuild.WasNodeBuiltAt(new Vector2Int(2,3)));
+            Assert.IsTrue(gameFieldBuild.WasNodeBuiltAt(new Position(2,3)));
         }
         
         [Test]
@@ -36,7 +37,7 @@ namespace Tests.Orchestrators
 
             gameFieldInput.ClickAt(new Vector2Int(1,1));
 
-            Assert.IsFalse(gameFieldBuild.WasNodeBuiltAt(new Vector2Int(1,1)));
+            Assert.IsFalse(gameFieldBuild.WasNodeBuiltAt(new Position(1,1)));
         }
 
         [Test]
@@ -51,8 +52,8 @@ namespace Tests.Orchestrators
             gameFieldInput.ClickAt(new Vector2Int(0,0));
             gameFieldInput.ClickAt(new Vector2Int(4,5));
 
-            Assert.IsTrue(gameFieldBuild.WasNodeBuiltAt(new Vector2Int(0,0)));
-            Assert.IsTrue(gameFieldBuild.WasNodeBuiltAt(new Vector2Int(4,5)));
+            Assert.IsTrue(gameFieldBuild.WasNodeBuiltAt(new Position(0,0)));
+            Assert.IsTrue(gameFieldBuild.WasNodeBuiltAt(new Position(4,5)));
         }
         
         [Test]
@@ -81,7 +82,7 @@ namespace Tests.Orchestrators
             _selectedNode = NodesPaletteUtils.CreatePaletteElement().Element;
         }
 
-        public NodesPaletteElement? CurrentlySelectedNode()
+        public NodesPaletteElement? CurrentlySelected()
         {
             return _selectedNode;
         }
@@ -89,22 +90,22 @@ namespace Tests.Orchestrators
 
     public class GameFieldNodeBuilderStub : IGameFieldNodeBuilder
     {
-        private List<Vector2Int> _builds = new List<Vector2Int>();
+        private List<Position> _builds = new List<Position>();
         
-        public bool WasNodeBuiltAt(Vector2Int vector2Int)
+        public bool WasNodeBuiltAt(Position position)
         {
-            return _builds.Contains(vector2Int);
-        }
-
-        public GameObject Build(Vector2Int at, GameObject node)
-        {
-            _builds.Add(at);
-            return node;
+            return _builds.Contains(position);
         }
 
         public int TotalNodesBuilt()
         {
             return _builds.Count;
+        }
+
+        public TNodeType Build<TNodeType>(Position at, TNodeType node) where TNodeType : NodeDisplay
+        {
+            _builds.Add(at);
+            return node;
         }
     }
 

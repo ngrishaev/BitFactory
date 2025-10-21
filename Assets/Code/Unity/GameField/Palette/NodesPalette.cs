@@ -1,3 +1,4 @@
+using System.Diagnostics.CodeAnalysis;
 using Code.Application.Ports;
 using Code.Unity.Services;
 using NaughtyAttributes;
@@ -15,6 +16,7 @@ namespace Code.Unity.GameField.Palette
         private IUserInputProvider _userInputProvider = null!;
         private NodesPaletteElement? _currentElement;
 
+        [ExcludeFromCodeCoverage]
         private void Awake()
         {
             Construct(_inputProvider); 
@@ -50,7 +52,7 @@ namespace Code.Unity.GameField.Palette
             _currentElement.Select();
         }
 
-        public NodesPaletteElement? CurrentlySelectedNode()
+        public NodesPaletteElement? CurrentlySelected()
         {
             return _currentElement;
         }

@@ -6,6 +6,7 @@
 Assets/AssetStoreTools*
 UserSettings/
 Logs/
+CodeCoverage/
 
 # Visual Studio cache directory
 .vs/

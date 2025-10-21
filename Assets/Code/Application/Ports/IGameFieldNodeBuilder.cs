@@ -1,9 +1,10 @@
-﻿using UnityEngine;
+﻿using Code.Domain;
+using Code.Unity.GameField.Nodes;
 
 namespace Code.Application.Ports
 {
     public interface IGameFieldNodeBuilder
     {
-        GameObject Build(Vector2Int at, GameObject node);
+        TNodeType Build<TNodeType>(Position at, TNodeType node) where TNodeType: NodeDisplay;
     }
 }
