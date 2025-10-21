@@ -1,5 +1,4 @@
-﻿using Code.Application.Common;
-using Code.Application.Ports;
+﻿using Code.Application.Ports;
 using Code.Domain;
 using Code.Domain.Nodes;
 using Code.Unity.GameField.Palette;
@@ -25,24 +24,24 @@ namespace Code.Application.Orchestrators
             gameFieldInput.OnCellClicked += CellClicked;
         }
 
-        private void CellClicked(Vector2Int cellPosition)
+        private void CellClicked(Position cellPosition)
         {
             var paletteElement = _gameFieldPalette.CurrentlySelected();
             if(paletteElement is null)
                 return;
             
-            if (_gameField.Occupied(cellPosition.ToPosition()))
+            if (_gameField.Occupied(cellPosition))
                 return;
             
-            var fieldNode = CreateNodeFromEnum(paletteElement, cellPosition.ToPosition());
+            var fieldNode = CreateNodeFromEnum(paletteElement, cellPosition);
             if (fieldNode == null)
             {
                 Debug.LogError("Cannot find node for the selected palette element: " + paletteElement.NodeType());
                 return;
             }
-            _gameField.SetNode(cellPosition.ToPosition(), fieldNode);
+            _gameField.SetNode(cellPosition, fieldNode);
             // TODO: `someNode.gameObject` - NOPE
-            _gameFieldNodeBuilder.Build(cellPosition.ToPosition(), paletteElement.Node, paletteElement.Rotation());
+            _gameFieldNodeBuilder.Build(cellPosition, paletteElement.Node, paletteElement.Rotation());
         }
 
         private static FieldNode? CreateNodeFromEnum(NodesPaletteElement currentNode, Position position)

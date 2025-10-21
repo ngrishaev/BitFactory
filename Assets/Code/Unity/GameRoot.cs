@@ -1,7 +1,5 @@
 ﻿using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
 using Code.Application.Orchestrators;
-using Code.Application.Ports;
 using Code.Domain;
 using Code.Unity.GameField.Builder;
 using Code.Unity.GameField.Input;

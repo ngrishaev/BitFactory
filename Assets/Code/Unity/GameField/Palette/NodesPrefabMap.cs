@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
 using Code.Domain.Nodes;
 using Code.Unity.GameField.Nodes;
 using UnityEngine;

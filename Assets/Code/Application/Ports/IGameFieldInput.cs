@@ -1,11 +1,11 @@
 ﻿using System;
-using UnityEngine;
+using Code.Domain;
 
 namespace Code.Application.Ports
 {
     public interface IGameFieldInput
     {
-        event Action<Vector2Int> OnCellClicked;
+        event Action<Position> OnCellClicked;
         event Action OnNextTickClicked;
     }
 }

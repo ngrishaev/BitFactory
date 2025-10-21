@@ -7,7 +7,6 @@ using Code.Domain.Nodes;
 using Code.Unity.GameField.Nodes;
 using Code.Unity.GameField.Palette;
 using NUnit.Framework;
-using UnityEngine;
 
 namespace Tests.Orchestrators
 {
@@ -23,7 +22,7 @@ namespace Tests.Orchestrators
             _ = new GameFieldOrchestrator(new GameField(8, 8), gameFieldInput, gameFieldBuild, gameFieldPalette);
             
             gameFieldPalette.SelectSomeNode();
-            gameFieldInput.ClickAt(new Vector2Int(2,3));
+            gameFieldInput.ClickAt(new Position(2,3));
             
             Assert.IsTrue(gameFieldBuild.WasNodeBuiltAt(new Position(2,3)));
         }
@@ -36,7 +35,7 @@ namespace Tests.Orchestrators
             var gameFieldPalette = new GameFieldPaletteStub();
             _ = new GameFieldOrchestrator(new GameField(8, 8), gameFieldInput, gameFieldBuild, gameFieldPalette);
 
-            gameFieldInput.ClickAt(new Vector2Int(1,1));
+            gameFieldInput.ClickAt(new Position(1,1));
 
             Assert.IsFalse(gameFieldBuild.WasNodeBuiltAt(new Position(1,1)));
         }
@@ -50,8 +49,8 @@ namespace Tests.Orchestrators
             _ = new GameFieldOrchestrator(new GameField(8, 8), gameFieldInput, gameFieldBuild, gameFieldPalette);
 
             gameFieldPalette.SelectSomeNode();
-            gameFieldInput.ClickAt(new Vector2Int(0,0));
-            gameFieldInput.ClickAt(new Vector2Int(4,5));
+            gameFieldInput.ClickAt(new Position(0,0));
+            gameFieldInput.ClickAt(new Position(4,5));
 
             Assert.IsTrue(gameFieldBuild.WasNodeBuiltAt(new Position(0,0)));
             Assert.IsTrue(gameFieldBuild.WasNodeBuiltAt(new Position(4,5)));
@@ -66,8 +65,8 @@ namespace Tests.Orchestrators
             _ = new GameFieldOrchestrator(new GameField(8, 8), gameFieldInput, gameFieldBuild, gameFieldPalette);
 
             gameFieldPalette.SelectSomeNode();
-            gameFieldInput.ClickAt(new Vector2Int(4, 5));
-            gameFieldInput.ClickAt(new Vector2Int(4, 5));
+            gameFieldInput.ClickAt(new Position(4, 5));
+            gameFieldInput.ClickAt(new Position(4, 5));
             
             Assert.True(gameFieldBuild.TotalNodesBuilt() == 1, "Expected only one node to be built, but found: " + gameFieldBuild.TotalNodesBuilt());
         }
@@ -112,10 +111,10 @@ namespace Tests.Orchestrators
 
     public class GameFieldInputStub : IGameFieldInput
     {
-        public event Action<Vector2Int>? OnCellClicked;
+        public event Action<Position>? OnCellClicked;
         public event Action? OnNextTickClicked;
 
-        public void ClickAt(Vector2Int vector2Int)
+        public void ClickAt(Position vector2Int)
         {
             OnCellClicked?.Invoke(vector2Int);
         }

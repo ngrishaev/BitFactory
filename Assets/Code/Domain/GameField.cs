@@ -1,5 +1,4 @@
-﻿using System;
-using Code.Domain.Nodes;
+﻿using Code.Domain.Nodes;
 
 namespace Code.Domain
 {

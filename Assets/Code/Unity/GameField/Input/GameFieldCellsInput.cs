@@ -1,5 +1,6 @@
 ﻿using System;
 using Code.Application.Ports;
+using Code.Domain;
 using Code.Unity.Services;
 using UnityEngine;
 using UnityEngine.UI;
@@ -16,7 +17,7 @@ namespace Code.Unity.GameField.Input
         
         private IUserInputProvider _userInputProvider = null!;
 
-        public event Action<Vector2Int>? OnCellClicked;
+        public event Action<Position>? OnCellClicked;
         public event Action? OnNextTickClicked;
 
         private void Awake()
@@ -34,7 +35,7 @@ namespace Code.Unity.GameField.Input
         private void OnClick()
         {
             var localMousePosition = _root.InverseTransformPoint(_userInputProvider.MousePosition());
-            var cellPosition = new Vector2Int(
+            var cellPosition = new Position(
                 Mathf.FloorToInt(localMousePosition.x / GlobalData.CellSize),
                 Mathf.FloorToInt(localMousePosition.y / GlobalData.CellSize));
             OnCellClicked?.Invoke(cellPosition);

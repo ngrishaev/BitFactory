@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using Code.Application.Common;
 using Code.Application.Ports;
 using Code.Domain;
 using Code.Unity.GameField.Nodes;
@@ -59,7 +58,7 @@ namespace Code.Application.Orchestrators
 
         private void SpawnPacket(SpawnPacketEvent spawnEvent)
         {
-            var display = _gamePacketFactory.Create(spawnEvent.Spawner.Position.ToVector2Int());
+            var display = _gamePacketFactory.Create(spawnEvent.Spawner.Position);
             var spawner = _nodesRegistryDisplay.GetNodeAt<SpawnerDisplay>(spawnEvent.Spawner.Position);
             var node = _nodesRegistryDisplay.GetNodeAt<HorizontalConnector>(spawnEvent.Node.Position);
             spawner.Accept(display);

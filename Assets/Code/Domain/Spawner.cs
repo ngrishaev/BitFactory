@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using Code.Domain.Nodes;
-using UnityEngine;
 
 namespace Code.Domain
 {

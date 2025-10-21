@@ -1,7 +1,5 @@
-﻿using System;
-using Code.Domain;
+﻿using Code.Domain;
 using Code.Unity.GameField.Nodes;
-using UnityEngine;
 
 namespace Code.Application.Ports
 {

@@ -1,4 +1,5 @@
 ﻿using System;
+using Code.Domain;
 using Code.Unity;
 using Code.Unity.GameField.Input;
 using Code.Unity.Services;
@@ -18,7 +19,7 @@ namespace Tests.Unity
             
             gameFieldInputWrapper.UserInputProviderStub.SetupMousePosition(new Vector3(50, 50));
             
-            var clickedPosition = new Vector2Int(-1, -1);
+            var clickedPosition = new Position(-1, -1);
             gameFieldInputWrapper.GameFieldInput.OnCellClicked += (cellPos) => clickedPosition = cellPos;
             gameFieldInputWrapper.GameFieldInputButton.onClick.Invoke();
             
@@ -34,7 +35,7 @@ namespace Tests.Unity
                     GlobalData.CellSize * 3 - GlobalData.CellSize / 2,
                     GlobalData.CellSize * 2 - GlobalData.CellSize / 2));
             
-            var clickedPosition = new Vector2Int(-1, -1);
+            var clickedPosition = new Position(-1, -1);
             gameFieldInputWrapper.GameFieldInput.OnCellClicked += cellPos => clickedPosition = cellPos;
             gameFieldInputWrapper.GameFieldInputButton.onClick.Invoke();
             
