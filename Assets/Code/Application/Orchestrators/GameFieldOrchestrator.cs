@@ -42,7 +42,7 @@ namespace Code.Application.Orchestrators
             }
             _gameField.SetNode(cellPosition.ToPosition(), fieldNode);
             // TODO: `someNode.gameObject` - NOPE
-            _gameFieldNodeBuilder.Build(cellPosition.ToPosition(), paletteElement.Node);
+            _gameFieldNodeBuilder.Build(cellPosition.ToPosition(), paletteElement.Node, paletteElement.Rotation());
         }
 
         private static FieldNode? CreateNodeFromEnum(NodesPaletteElement currentNode, Position position)

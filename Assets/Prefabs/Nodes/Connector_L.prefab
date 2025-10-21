@@ -49,6 +49,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce39eae4f4fc4917a721f824997c039a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Code::Code.Unity.GameField.Nodes.LConnector
+  _icon: {fileID: 7531041990114492562}
 --- !u!1 &7390658086542886731
 GameObject:
   m_ObjectHideFlags: 0

@@ -1,8 +1,10 @@
 ﻿using System;
 using UnityEngine;
+using UnityEngine.TestTools;
 
 namespace Code.Unity.Services
 {
+    [ExcludeFromCoverage]
     public class UserInputProvider : MonoBehaviour, IUserInputProvider
     {
         public event Action? OnRKeyPressed;

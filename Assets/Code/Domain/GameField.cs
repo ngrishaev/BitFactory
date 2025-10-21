@@ -1,4 +1,5 @@
-﻿using Code.Domain.Nodes;
+﻿using System;
+using Code.Domain.Nodes;
 
 namespace Code.Domain
 {
@@ -16,7 +17,7 @@ namespace Code.Domain
             _nodes[position] ??= node;
         }
 
-        public FieldNode? GetAt(Position position)
+        public FieldNode? GetNodeAt(Position position)
         {
             return _nodes[position];
         }
@@ -26,14 +27,6 @@ namespace Code.Domain
             return _nodes[position] != null;
         }
 
-        public FieldNode? GetNodeAt(Position position)
-        {
-            if (position.X >= _nodes.GetLength(0) || position.Y >= _nodes.GetLength(1) || position.X < 0 || position.Y < 0)
-                return null;
-            
-            return _nodes[position];
-        }
-
         private class FieldNodes
         {
             private readonly FieldNode?[,] _nodes;
@@ -41,12 +34,6 @@ namespace Code.Domain
             public FieldNodes(int width, int height)
             {
                 _nodes = new FieldNode[width,height];
-            }
-        
-            public FieldNode? this[int x, int y]
-            {
-                get => _nodes[x, y];
-                set => _nodes[x, y] = value;
             }
 
             public FieldNode? this[Position pos]

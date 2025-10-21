@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Code.Application.Orchestrators;
 using Code.Application.Ports;
 using Code.Domain;
+using Code.Domain.Nodes;
 using Code.Unity.GameField.Nodes;
 using Code.Unity.GameField.Palette;
 using NUnit.Framework;
@@ -102,7 +103,7 @@ namespace Tests.Orchestrators
             return _builds.Count;
         }
 
-        public TNodeType Build<TNodeType>(Position at, TNodeType node) where TNodeType : NodeDisplay
+        public TNodeType Build<TNodeType>(Position at, TNodeType node, Rotation rotation) where TNodeType : NodeDisplay
         {
             _builds.Add(at);
             return node;

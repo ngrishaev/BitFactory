@@ -49,6 +49,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 809c4af6aeb4420fa03cd4bdaf2bc0be, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Code::Code.Unity.GameField.Nodes.HorizontalConnector
+  _icon: {fileID: 6192765810235527756}
 --- !u!1 &3525756828695689575
 GameObject:
   m_ObjectHideFlags: 0

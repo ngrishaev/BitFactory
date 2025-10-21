@@ -14,7 +14,7 @@ namespace Tests.Domain
 
             var fieldNode = new ConnectorH(Rotation.Clockwise0, Position.Zero);
             field.SetNode(Position.Zero, fieldNode);
-            var returnedNode = field.GetAt(Position.Zero);
+            var returnedNode = field.GetNodeAt(Position.Zero);
             
             Assert.AreSame(returnedNode, fieldNode);
         }
@@ -24,10 +24,9 @@ namespace Tests.Domain
         {
             var field = new GameField(8, 8);
             
-            var returnedNode = field.GetAt(Position.Zero);
+            var returnedNode = field.GetNodeAt(Position.Zero);
             
             Assert.IsNull(returnedNode);
         }
-        
     }
 }

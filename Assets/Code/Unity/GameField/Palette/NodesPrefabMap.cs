@@ -4,10 +4,11 @@ using System.Diagnostics.CodeAnalysis;
 using Code.Domain.Nodes;
 using Code.Unity.GameField.Nodes;
 using UnityEngine;
+using UnityEngine.TestTools;
 
 namespace Code.Unity.GameField.Palette
 {
-    [ExcludeFromCodeCoverage]
+    [ExcludeFromCoverage]
     [CreateAssetMenu(fileName = "NodePrefabMap", menuName = "ScriptableObjects/MapNodeDictionary", order = 1)]
     public class NodesPrefabMap: ScriptableObject
     {

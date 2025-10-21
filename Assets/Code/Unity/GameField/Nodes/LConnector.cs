@@ -2,7 +2,7 @@
 
 namespace Code.Unity.GameField.Nodes
 {
-    public class LConnector: NodeDisplay
+    public sealed class LConnector: NodeDisplay
     {
         public void PlayAccept(PacketDisplay display)
         {

@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Code.Unity.GameField.Nodes
 {
-    public class HorizontalConnector: NodeDisplay
+    public sealed class HorizontalConnector: NodeDisplay
     {
         public void PlayAccept(PacketDisplay display)
         {

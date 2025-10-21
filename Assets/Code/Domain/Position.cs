@@ -1,4 +1,6 @@
-﻿namespace Code.Domain
+﻿using UnityEngine.TestTools;
+
+namespace Code.Domain
 {
     public record Position
     {
@@ -33,6 +35,7 @@
         
         public static Position Zero => new(0, 0);
         
+        [ExcludeFromCoverage]
         public override string ToString()
         {
             return $"({X}, {Y})";

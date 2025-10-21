@@ -10,11 +10,12 @@ using Code.Unity.Services;
 using Code.Unity.Swapner;
 using NaughtyAttributes;
 using UnityEngine;
+using UnityEngine.TestTools;
 
 // ReSharper disable NotAccessedField.Local
 namespace Code.Unity
 { 
-    [ExcludeFromCodeCoverage]
+    [ExcludeFromCoverage]
     public class GameRoot: MonoBehaviour
     {
         [SerializeField, Required] private NodesPalette _palette = null!;
